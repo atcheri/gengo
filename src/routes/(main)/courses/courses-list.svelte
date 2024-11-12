@@ -1,27 +1,31 @@
 <script lang="ts">
-	import { courses as coursesSchema, userProgress as userProgressSchema } from '$lib/db/schema.js';
 	import Card from './card.svelte';
 	import { goto } from '$app/navigation';
 
 	type Props = {
-		activeCourseId: typeof userProgressSchema.$inferSelect.activeCourseId;
-		courses: (typeof coursesSchema.$inferSelect)[];
+		activeCourseId: number | null;
+		courses: { id: number; title: string; imageSrc: string }[];
 	};
 
 	let { activeCourseId, courses }: Props = $props();
 	let pending = $state(false);
 
-	const onClick = (id: number) => {
+	const onClick = async (id: number) => {
 		if (pending) return;
 
 		pending = true;
 
-		// TODO: execute the side effect here
-
 		if (id === activeCourseId) {
-			pending = false;
 			goto('/learn');
+			return;
 		}
+
+		await fetch('api/courses', {
+			method: 'POST',
+			body: JSON.stringify({ courseId: id })
+		});
+		pending = false;
+		activeCourseId = id;
 	};
 </script>
 
@@ -32,7 +36,7 @@
 			title={course.title}
 			imageSrc={course.imageSrc}
 			onclick={onClick}
-			active={course.id === activeCourseId}
+			active={!!activeCourseId && course.id === activeCourseId}
 		/>
 	{/each}
 </div>

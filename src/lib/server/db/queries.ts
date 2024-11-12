@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from './drizzle.js';
-import { courses, userProgress } from '$lib/db/schema.js';
+import { db } from '$lib/server/db/drizzle.js';
+import { courses, userProgress } from '$lib/server/db/schema.js';
 
 export const getCourses = async () => {
 	const data = await db.query.courses.findMany();
@@ -8,7 +8,7 @@ export const getCourses = async () => {
 	return data;
 };
 
-export const getUserProcess = async (userId: string | undefined) => {
+export const getUserProgress = async (userId: string | undefined) => {
 	if (!userId) {
 		return undefined;
 	}
