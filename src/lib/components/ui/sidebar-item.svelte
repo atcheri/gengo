@@ -4,8 +4,6 @@
 	import { page } from '$app/stores';
 
 	let { label, href = '' } = $props();
-	console.log('$page.url.pathname:', $page.url.pathname);
-	console.log('$page.url.pathname.includes(href):', $page.url.pathname.includes(href));
 	let variant: ButtonProps['variant'] = $page.url.pathname.includes(href)
 		? 'sidebarOutline'
 		: 'sidebar';
