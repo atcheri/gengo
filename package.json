@@ -86,6 +86,7 @@
 		"@auth/sveltekit": "^1.7.3",
 		"@neondatabase/serverless": "^0.10.3",
 		"dotenv": "^16.4.5",
-		"drizzle-orm": "^0.36.1"
+		"drizzle-orm": "^0.36.1",
+		"lucide-svelte": "^0.456.0"
 	}
 }
