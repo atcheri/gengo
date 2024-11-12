@@ -1,25 +1,39 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/button/button.svelte';
-
-	const alertIt = () => {
-		alert("it's going to driiiing!");
-	};
+	import { signIn } from '@auth/sveltekit/client';
 </script>
 
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-<div>
-	<Button variant="default" onclick={alertIt}>T</Button>
-	<Button variant="primary" onclick={alertIt}>T</Button>
-	<Button variant="primaryOutline" onclick={alertIt}>T</Button>
-	<Button variant="secondary" onclick={alertIt}>T</Button>
-	<Button variant="secondaryOutline" onclick={alertIt}>T</Button>
-	<Button variant="danger" onclick={alertIt}>T</Button>
-	<Button variant="dangerOutline" onclick={alertIt}>T</Button>
-	<Button variant="super" onclick={alertIt}>T</Button>
-	<Button variant="superOutline" onclick={alertIt}>SuperOutline</Button>
-	<Button variant="sidebar" onclick={alertIt}>sidebar</Button>
-	<Button variant="sidebarOutline" onclick={alertIt}>sidebarOutline</Button>
-	<Button variant="ghost" onclick={alertIt}>t</Button>
-</div>
+<main
+	class="mx-auto flex w-full max-w-[988px] flex-1 flex-col items-center justify-center gap-2 p-4 lg:flex-row"
+>
+	<div class="relative mb-8 h-[240px] w-[240px] lg:mb-0 lg:h-[424px] lg:w-[424px]">
+		<img src="/images/hero.svg" alt="Hero" />
+	</div>
+	<div class="flex flex-col items-center gap-y-8">
+		<h1 class="max-w-[480px] text-center text-xl font-bold text-neutral-600 lg:text-3xl">
+			Learn and practice new languages with <span class="italic text-green-600"> Gengo</span> !
+		</h1>
+		<div class="flex w-full max-w-[330px] flex-col items-center gap-y-3">
+			<div>{$page.status}</div>
+			{#if $page.data.session}
+				<Button size="lg" variant="secondary" class="w-full capitalize">
+					<a href="/learn">Continue Learning</a>
+				</Button>
+			{:else}
+				<Button
+					size="lg"
+					variant="secondary"
+					onclick={() => signIn('github')}
+					class="w-full capitalize">Get started</Button
+				>
+				<Button
+					size="lg"
+					variant="primaryOutline"
+					onclick={() => signIn('github')}
+					class="w-full capitalize">I already have an account</Button
+				>
+			{/if}
+		</div>
+	</div>
+</main>
