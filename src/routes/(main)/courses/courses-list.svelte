@@ -1,19 +1,25 @@
 <script lang="ts">
-	import type { getCourses } from '@db/queries.js';
+	import { courses as coursesSchema, userProgress as userProgressSchema } from '$lib/db/schema.js';
 	import Card from './card.svelte';
 	import { goto } from '$app/navigation';
 
 	type Props = {
-		activeCourseId?: number;
-		courses: Awaited<ReturnType<typeof getCourses>>;
+		activeCourseId: typeof userProgressSchema.$inferSelect.activeCourseId;
+		courses: (typeof coursesSchema.$inferSelect)[];
 	};
 
 	let { activeCourseId, courses }: Props = $props();
+	let pending = $state(false);
 
 	const onClick = (id: number) => {
-		// if (pending) return;
+		if (pending) return;
+
+		pending = true;
+
+		// TODO: execute the side effect here
 
 		if (id === activeCourseId) {
+			pending = false;
 			goto('/learn');
 		}
 	};
