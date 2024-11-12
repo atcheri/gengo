@@ -84,6 +84,9 @@ importers:
       eslint-plugin-svelte:
         specifier: ^2.46.0
         version: 2.46.0(eslint@9.14.0(jiti@1.21.6))(svelte@5.1.12)
+      flowbite-svelte-icons:
+        specifier: ^2.0.2
+        version: 2.0.2(svelte@5.1.12)(tailwind-merge@2.5.4)(tailwindcss@3.4.14)
       globals:
         specifier: ^15.12.0
         version: 15.12.0
@@ -1608,6 +1611,14 @@ packages:
 
   flatted@3.3.1:
     resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
+
+  flowbite-svelte-icons@2.0.2:
+    resolution: {integrity: sha512-Vkmduy2867Rk8R7TziPirsWkixJnToFBEXRaN4ouJabOx62NQjiBbHFe+HTaMOQmdp4FNMI2Nhtk2I2CQ8r3RQ==}
+    engines: {node: '>=18.0.0', npm: '>=7.0.0'}
+    peerDependencies:
+      svelte: ^5.0.0
+      tailwind-merge: ^2.3.0
+      tailwindcss: ^3.4.3
 
   focus-trap@7.6.0:
     resolution: {integrity: sha512-1td0l3pMkWJLFipobUcGaf+5DTY4PLDDrcqoSaKP8ediO/CoWCCYk/fT/Y2A4e6TNB+Sh6clRJCjOPPnKoNHnQ==}
@@ -4328,6 +4339,12 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.3.1: {}
+
+  flowbite-svelte-icons@2.0.2(svelte@5.1.12)(tailwind-merge@2.5.4)(tailwindcss@3.4.14):
+    dependencies:
+      svelte: 5.1.12
+      tailwind-merge: 2.5.4
+      tailwindcss: 3.4.14
 
   focus-trap@7.6.0:
     dependencies:
