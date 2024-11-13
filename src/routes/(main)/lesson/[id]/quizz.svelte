@@ -2,6 +2,7 @@
 	import type { PageData } from './$types.js';
 	import Challenge from './challenge.svelte';
 	import ExitDialog from './exit-dialog.svelte';
+	import Footer from './footer.svelte';
 	import Header from './header.svelte';
 	import QuestionBubble from './question-bubble.svelte';
 
@@ -40,6 +41,7 @@
 
 		option = id;
 	};
+	const onContinue = async () => {};
 </script>
 
 <Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
@@ -64,3 +66,4 @@
 		</div>
 	</div>
 </div>
+<Footer disabled={pending || !option} {status} onCheck={onContinue} />
