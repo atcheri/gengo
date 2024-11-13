@@ -23,6 +23,9 @@ importers:
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
+      svelte-sound:
+        specifier: ^0.6.0
+        version: 0.6.0
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^3.2.2
@@ -2151,6 +2154,9 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
+
   htmlparser2-svelte@4.1.0:
     resolution: {integrity: sha512-+4f4RBFz7Rj2Hp0ZbFbXC+Kzbd6S9PgjiuFtdT76VMNgKogrEZy0pG2UrPycPbrZzVEIM5lAT3lAdkSTCHLPjg==}
 
@@ -2997,6 +3003,9 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-sound@0.6.0:
+    resolution: {integrity: sha512-n0JJwWwNEmsGntSN9oe57yevHrIg8Lw3tW2XsfdrDhJXwrbAAmLvbBJQ0Z3TFqONUW7+OWb5Yx04CSCo7q56fA==}
 
   svelte2tsx@0.7.23:
     resolution: {integrity: sha512-LUVKEHlblBYvzOXdpMHhyMle7iSZ/qr71gGhf1AIrsk1j0FjwTLXp9QuSmPop4C4IlL5BSGFS95Kr78Rb9Eyuw==}
@@ -5174,6 +5183,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  howler@2.2.4: {}
+
   htmlparser2-svelte@4.1.0:
     dependencies:
       domelementtype: 2.3.0
@@ -5877,6 +5888,10 @@ snapshots:
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
       typescript: 5.6.3
+
+  svelte-sound@0.6.0:
+    dependencies:
+      howler: 2.2.4
 
   svelte2tsx@0.7.23(svelte@5.1.12)(typescript@5.6.3):
     dependencies:

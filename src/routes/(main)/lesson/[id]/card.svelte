@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { sound } from 'svelte-sound';
 	import { cn } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 
@@ -19,7 +20,9 @@
 		$props();
 </script>
 
-<div
+<button
+	use:sound={{ src: audioSrc, events: ['click'] }}
+	onclick={onClick}
 	class={cn(
 		'h-full cursor-pointer rounded-xl border-2 border-b-4 p-4 hover:bg-black/5 active:border-b-2 lg:p-6',
 		selected && 'border-sky-300 bg-sky-100 hover:bg-sky-100',
@@ -59,4 +62,4 @@
 			{shortcut}
 		</div>
 	</div>
-</div>
+</button>
