@@ -17,7 +17,9 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"db:studio": "npx drizzle-kit studio",
-		"db:push": "npx drizzle-kit push"
+		"db:push": "npx drizzle-kit push",
+		"db:seed": "npx tsx ./scripts/seed.ts",
+		"db:reset": "npx tsx ./scripts/reset.ts"
 	},
 	"files": [
 		"dist",
