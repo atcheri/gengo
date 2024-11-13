@@ -67,7 +67,7 @@
 		}
 
 		if (correctOption.id === selectedOption) {
-			await fetch('/api/lesson', {
+			await fetch('/api/lesson/update-challenge-progress', {
 				method: 'POST',
 				body: JSON.stringify({ challengeId: challenge.id })
 			})
@@ -92,7 +92,33 @@
 					// toast.error('Something went wrong. Please try again.')
 				});
 		} else {
-			console.error('wrong answer ...');
+			await fetch('/api/lesson/reduce-hearts', {
+				method: 'POST',
+				body: JSON.stringify({ challengeId: challenge.id })
+			})
+				.then(async (response) => {
+					console.log('response:', response);
+					if (!response.ok) {
+						const { message } = await response.json();
+						throw message;
+					}
+					// incorrectControls.play();
+					status = 'wrong';
+					percentage = percentage + 100 / initialLessonChallenges.length;
+					if (initialPercentage === 100) {
+						hearts = Math.max(hearts - 1, 0);
+					}
+				})
+				.catch((error) => {
+					if (error === 'hearts') {
+						// openHeartsModal();
+						console.error('something went wrong with the hearts');
+						return;
+					} else if (error === 'practice') {
+						console.log("nothing to do, it's just practice");
+					}
+					// toast.error('Something went wrong. Please try again.')
+				});
 		}
 	};
 </script>
