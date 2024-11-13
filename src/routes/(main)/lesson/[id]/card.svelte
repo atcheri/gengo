@@ -2,6 +2,7 @@
 	import { Sound, sound } from 'svelte-sound';
 	import { cn } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
+	import { preventDefault } from 'svelte/legacy';
 
 	type Props = {
 		id: number;
@@ -10,24 +11,35 @@
 		text: string;
 		shortcut: string;
 		selected?: boolean;
-		onClick: () => void;
+		onClick: (id: number) => void;
 		disabled?: boolean;
 		status?: 'correct' | 'wrong' | 'none';
 		type: PageData['lesson']['challenges'][0]['type'];
 	};
 
-	const { imageSrc, audioSrc, text, shortcut, selected, onClick, status, disabled, type }: Props =
-		$props();
+	const {
+		id,
+		imageSrc,
+		audioSrc,
+		text,
+		shortcut,
+		selected,
+		onClick,
+		status,
+		disabled,
+		type
+	}: Props = $props();
 
 	const handleKeyStroke = (event: KeyboardEvent) => {
-		if (event.code !== `Digit${shortcut}`) {
+		event.preventDefault();
+		if (![`Digit${shortcut}`].includes(event.code)) {
 			return;
 		}
 
 		const voice = new Sound(audioSrc);
 		setTimeout(() => {
 			voice.play();
-			onClick();
+			onClick(id);
 		}, 1);
 	};
 </script>
@@ -36,7 +48,7 @@
 
 <button
 	use:sound={{ src: audioSrc, events: ['click'] }}
-	onclick={onClick}
+	onclick={() => onClick(id)}
 	class={cn(
 		'h-full cursor-pointer rounded-xl border-2 border-b-4 p-4 hover:bg-black/5 active:border-b-2 lg:p-6',
 		selected && 'border-sky-300 bg-sky-100 hover:bg-sky-100',

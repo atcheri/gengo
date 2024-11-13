@@ -23,7 +23,7 @@
 	}: Props = $props();
 	let hearts = $state(initialHearts);
 	let percentage = $derived.by(() => (initialPercentage === 100 ? 0 : initialPercentage));
-	const activeIndex = $derived.by(() => {
+	let activeIndex = $derived.by(() => {
 		const uncompletedIndex = initialLessonChallenges.findIndex((challenge) => !challenge.completed);
 		return uncompletedIndex === -1 ? 0 : uncompletedIndex;
 	});
@@ -32,16 +32,49 @@
 	const title = $derived.by(() => {
 		return challenge.type === 'ASSIST' ? 'Select the correct meaning' : challenge.question;
 	});
-	const status = $state<'correct' | 'wrong' | 'none'>('none');
-	let option = $state(0);
+	let status = $state<'correct' | 'wrong' | 'none'>('none');
+	let selectedOption = $state(0);
 	let pending = $state(false);
 
 	const onSelect = (id: number) => {
 		if (status !== 'none') return;
 
-		option = id;
+		selectedOption = id;
 	};
-	const onContinue = async () => {};
+
+	const onNext = () => {
+		//
+	};
+
+	const onContinue = async () => {
+		if (!selectedOption) return;
+
+		if (status === 'wrong') {
+			status = 'none';
+			selectedOption = 0;
+			return;
+		}
+
+		if (status === 'correct') {
+			status = 'none';
+			selectedOption = 0;
+			onNext();
+			return;
+		}
+
+		const correctOption = options.find((option) => option.correct);
+
+		if (!correctOption) {
+			return;
+		}
+
+		if (correctOption.id === selectedOption) {
+			console.log('found the correct answer');
+			return;
+		} else {
+			console.error('wrong answer ...');
+		}
+	};
 </script>
 
 <Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
@@ -58,7 +91,7 @@
 			<Challenge
 				{options}
 				{onSelect}
-				selectedOption={option}
+				{selectedOption}
 				disabled={pending}
 				{status}
 				type={challenge.type}
@@ -66,4 +99,4 @@
 		</div>
 	</div>
 </div>
-<Footer disabled={pending || !option} {status} onCheck={onContinue} />
+<Footer disabled={pending || !selectedOption} {status} onCheck={onContinue} />

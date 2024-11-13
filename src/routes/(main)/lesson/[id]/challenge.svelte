@@ -13,7 +13,16 @@
 	};
 
 	const { options, onSelect, status, selectedOption, disabled, type }: Props = $props();
+	const handleKeyStroke = (event: KeyboardEvent) => {
+		if ('Enter' !== event.code) {
+			return;
+		}
+
+		console.log('shoudl validate here');
+	};
 </script>
+
+<svelte:body onkeydown={handleKeyStroke} />
 
 <div
 	class={cn(
@@ -29,7 +38,7 @@
 			imageSrc={option.imageSrc}
 			shortcut={`${i + 1}`}
 			selected={selectedOption === option.id}
-			onClick={() => onSelect(option.id)}
+			onClick={(id: number) => onSelect(id)}
 			{status}
 			audioSrc={option.audioSrc}
 			{disabled}
