@@ -16,7 +16,7 @@
 		pending = true;
 
 		if (id !== activeCourseId) {
-			await fetch('api/courses', {
+			await fetch('/api/courses', {
 				method: 'POST',
 				body: JSON.stringify({ courseId: id })
 			});

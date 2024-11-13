@@ -22,7 +22,7 @@
 		userSubscription
 	}: Props = $props();
 	let hearts = $state(initialHearts);
-	let percentage = $derived.by(() => (initialPercentage === 100 ? 0 : initialPercentage));
+	let percentage = $state(initialPercentage === 100 ? 0 : initialPercentage);
 	let activeIndex = $derived.by(() => {
 		const uncompletedIndex = initialLessonChallenges.findIndex((challenge) => !challenge.completed);
 		return uncompletedIndex === -1 ? 0 : uncompletedIndex;
@@ -69,8 +69,30 @@
 		}
 
 		if (correctOption.id === selectedOption) {
-			console.log('found the correct answer');
-			return;
+			await fetch('/api/lesson', {
+				method: 'POST',
+				body: JSON.stringify({ challengeId: challenge.id })
+			})
+				.then(async (response) => {
+					if (!response.ok) {
+						const { message } = await response.json();
+						throw message;
+					}
+					// correctControls.play();
+					status = 'correct';
+					percentage = percentage + 100 / initialLessonChallenges.length;
+					if (initialPercentage === 100) {
+						hearts = Math.min(hearts + 1, 5);
+					}
+				})
+				.catch((error) => {
+					if (error === 'hearts') {
+						// openHeartsModal();
+						console.error('something went wrong with the hearts');
+						return;
+					}
+					// toast.error('Something went wrong. Please try again.')
+				});
 		} else {
 			console.error('wrong answer ...');
 		}
