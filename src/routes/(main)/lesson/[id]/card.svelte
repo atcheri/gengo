@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { sound } from 'svelte-sound';
+	import { Sound, sound } from 'svelte-sound';
 	import { cn } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 
@@ -18,7 +18,21 @@
 
 	const { imageSrc, audioSrc, text, shortcut, selected, onClick, status, disabled, type }: Props =
 		$props();
+
+	const handleKeyStroke = (event: KeyboardEvent) => {
+		if (event.code !== `Digit${shortcut}`) {
+			return;
+		}
+
+		const voice = new Sound(audioSrc);
+		setTimeout(() => {
+			voice.play();
+			onClick();
+		}, 1);
+	};
 </script>
+
+<svelte:body onkeydown={handleKeyStroke} />
 
 <button
 	use:sound={{ src: audioSrc, events: ['click'] }}
