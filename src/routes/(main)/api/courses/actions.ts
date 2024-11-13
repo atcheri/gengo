@@ -26,7 +26,7 @@ export const upsertUserProgress = async (user: User, courseId: number) => {
 		await db.update(userProgress).set({
 			activeCourseId: courseId,
 			userName: user.name || 'User',
-			userImageSrc: user.image || '/mascot.svg'
+			userImageSrc: user.image || '/images/mascot.svg'
 		});
 		return;
 	}
@@ -36,6 +36,6 @@ export const upsertUserProgress = async (user: User, courseId: number) => {
 		userEmail: user.email,
 		activeCourseId: courseId,
 		userName: user.name || 'User',
-		userImageSrc: user.image || '/mascot.svg'
+		userImageSrc: user.image || '/images/mascot.svg'
 	});
 };

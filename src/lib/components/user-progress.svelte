@@ -4,13 +4,14 @@
 	import InfinityIcon from './ui/icons/infinity-icon.svelte';
 	import Coins from './ui/icons/coins.svelte';
 
-	export let activeCourse: {
-		title: string;
-		imageSrc: string;
+	type Props = {
+		activeCourse: { id: number; title: string; imageSrc: string };
+		hearts: number | undefined;
+		points: number | undefined;
+		hasActiveSubscription: boolean;
 	};
-	export let hearts: number;
-	export let points: number;
-	export let hasActiveSubscription: boolean;
+
+	let { activeCourse, hearts, points, hasActiveSubscription }: Props = $props();
 </script>
 
 <div class="flex w-full items-center justify-between gap-x-2">

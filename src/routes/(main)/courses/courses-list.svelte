@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 
 	type Props = {
-		activeCourseId: number | null;
+		activeCourseId: number | null | undefined;
 		courses: { id: number; title: string; imageSrc: string }[];
 	};
 
@@ -15,17 +15,16 @@
 
 		pending = true;
 
-		if (id === activeCourseId) {
-			goto('/learn');
-			return;
+		if (id !== activeCourseId) {
+			await fetch('api/courses', {
+				method: 'POST',
+				body: JSON.stringify({ courseId: id })
+			});
 		}
 
-		await fetch('api/courses', {
-			method: 'POST',
-			body: JSON.stringify({ courseId: id })
-		});
 		pending = false;
 		activeCourseId = id;
+		goto('/learn');
 	};
 </script>
 
