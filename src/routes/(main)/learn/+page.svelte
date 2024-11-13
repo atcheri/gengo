@@ -4,6 +4,7 @@
 	import UserProgress from '$lib/components/user-progress.svelte';
 	import type { PageData } from './$types.js';
 	import Header from './header.svelte';
+	import Unit from './unit.svelte';
 
 	export let data: PageData;
 	let { activeCourse, hearts, points, units } = data;
@@ -17,7 +18,15 @@
 		<FeedWrapper>
 			<Header title={activeCourse.title} />
 			{#each units as unit}
-				{JSON.stringify(unit)}
+				<Unit
+					id={unit.id}
+					order={unit.order}
+					description={unit.description}
+					title={unit.title}
+					lessons={unit.lessons}
+					activeLesson={undefined}
+					activeLessonPercentage={0}
+				/>
 			{/each}
 		</FeedWrapper>
 	</div>

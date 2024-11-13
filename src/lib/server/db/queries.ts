@@ -55,7 +55,6 @@ export const getUnits = async (userId: string) => {
 		}
 	});
 
-	console.log('data:', data);
 	const normalizedData = data.map((unit) => {
 		const lessonsWithCompletedStatus = unit.lessons.map((lesson) => {
 			if (lesson.challenges.length === 0) {
