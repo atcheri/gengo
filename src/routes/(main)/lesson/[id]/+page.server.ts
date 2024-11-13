@@ -5,7 +5,6 @@ import { StatusCodes } from 'http-status-codes';
 import crypto from 'crypto';
 
 export const load: PageServerLoad = (async ({ locals, params }) => {
-	console.log('params:', params);
 	const session = await locals.auth();
 	if (!session || !session.user || !session.user.email) {
 		return redirect(StatusCodes.UNAUTHORIZED, '/');

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types.js';
+	import ExitDialog from './exit-dialog.svelte';
 	import Header from './header.svelte';
 
 	type Props = {
@@ -22,3 +23,4 @@
 </script>
 
 <Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
+<ExitDialog />

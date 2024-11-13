@@ -1,5 +1,11 @@
 <script lang="ts">
+	// import { setContext } from 'svelte';
+	// import { writable } from 'svelte/store';
+
 	let { children } = $props();
+
+	// const exitDialogOpened = writable(false);
+	// setContext('exitDialogOpened', exitDialogOpened);
 </script>
 
 <div class="flex h-full flex-col">

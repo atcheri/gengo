@@ -3,6 +3,7 @@
 	import Progress from '$lib/components/ui/progress/progress.svelte';
 	import { HeartSolid } from 'flowbite-svelte-icons';
 	import X from 'lucide-svelte/icons/x';
+	import { exitDialogOpened } from './store.js';
 
 	type Props = {
 		hearts: number;
@@ -12,7 +13,9 @@
 
 	const { hasActiveSubscription, hearts, percentage }: Props = $props();
 
-	const open = () => {};
+	const open = () => {
+		exitDialogOpened.set(true);
+	};
 </script>
 
 <header
