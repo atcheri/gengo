@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import ModeToggler from '$lib/components/mode-toggler.svelte';
 </script>
 
 <header class="h-20 w-full border-b-2 border-slate-200 px-4">
@@ -23,5 +24,6 @@
 		{:else}
 			<Button variant="ghost" onclick={() => signIn('github')}>Sign in</Button>
 		{/if}
+		<ModeToggler />
 	</div>
 </header>

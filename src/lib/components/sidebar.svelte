@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils.js';
+	import ModeToggler from './mode-toggler.svelte';
 	import SidebarItem from './ui/sidebar-item.svelte';
 
 	let { className = '' } = $props();
@@ -15,5 +16,6 @@
 		<SidebarItem href="/leaderboard" label="Leaderboard" />
 		<SidebarItem href="/quests" label="Quests" />
 		<SidebarItem href="/shop" label="Shop" />
+		<ModeToggler class="self-center" />
 	</div>
 </div>
