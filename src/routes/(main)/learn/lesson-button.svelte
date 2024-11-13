@@ -35,7 +35,9 @@
 	let isFirst = $state(index === 0);
 	let isLast = $state(index === totalCount);
 	let isCompleted = $state(!current && !locked);
-	let href = $derived(!current && !locked ? `/lesson/${id}` : '/lesson');
+	// TODO: verify whether the condition is correct or necessary
+	// let href = $derived(!current && !locked ? `/lesson/${id}` : '/lesson');
+	let href = $derived(`/lesson/${id}`);
 	let Icon = $derived(!current && !locked ? Check : isLast ? Crown : Star);
 </script>
 
