@@ -6,7 +6,7 @@
 	import Header from './header.svelte';
 
 	export let data: PageData;
-	let { activeCourse, hearts, points } = data;
+	let { activeCourse, hearts, points, units } = data;
 </script>
 
 {#if activeCourse}
@@ -16,7 +16,9 @@
 		</StickyWrapper>
 		<FeedWrapper>
 			<Header title={activeCourse.title} />
-			<div class="space-y-4"></div>
+			{#each units as unit}
+				{JSON.stringify(unit)}
+			{/each}
 		</FeedWrapper>
 	</div>
 {/if}

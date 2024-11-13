@@ -1,4 +1,4 @@
-import { getUserProgress } from '$lib/server/db/queries.js';
+import { getUnits, getUserProgress } from '$lib/server/db/queries.js';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import crypto from 'crypto';
@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
 
 	const userId = crypto.createHash('md5').update(session.user.email).digest('hex');
-	const userProgress = await getUserProgress(userId);
+	const [units, userProgress] = await Promise.all([getUnits(userId), getUserProgress(userId)]);
 
 	if (!userProgress || !userProgress.activeCourse) {
 		redirect(StatusCodes.TEMPORARY_REDIRECT, '/courses');
@@ -20,6 +20,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	return {
 		activeCourse: userProgress?.activeCourse,
 		hearts: userProgress?.hearts,
-		points: userProgress?.points
+		points: userProgress?.points,
+		units
 	};
 };
