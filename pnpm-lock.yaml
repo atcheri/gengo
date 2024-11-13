@@ -23,9 +23,6 @@ importers:
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
-      lucide-svelte:
-        specifier: ^0.456.0
-        version: 0.456.0(svelte@5.1.12)
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^3.2.2
@@ -108,6 +105,9 @@ importers:
       globals:
         specifier: ^15.12.0
         version: 15.12.0
+      lucide-svelte:
+        specifier: ^0.456.0
+        version: 0.456.0(svelte@5.1.12)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
