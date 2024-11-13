@@ -7,7 +7,7 @@
 	import Unit from './unit.svelte';
 
 	export let data: PageData;
-	let { activeCourse, hearts, points, units } = data;
+	let { activeCourse, courseProgress, hearts, lessonPercentage, points, units } = data;
 </script>
 
 {#if activeCourse}
@@ -24,8 +24,8 @@
 					description={unit.description}
 					title={unit.title}
 					lessons={unit.lessons}
-					activeLesson={undefined}
-					activeLessonPercentage={0}
+					activeLesson={courseProgress.activeLesson}
+					activeLessonPercentage={lessonPercentage}
 				/>
 			{/each}
 		</FeedWrapper>

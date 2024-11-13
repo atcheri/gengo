@@ -66,7 +66,7 @@
 					<Button
 						size="rounded"
 						variant={locked ? 'locked' : 'secondary'}
-						class="relative left-4 top-5 h-[70px] w-[70px] border-b-8"
+						class="relative left-4 top-4 h-[70px] w-[70px] border-b-8"
 					>
 						<Icon
 							class={cn(
@@ -84,7 +84,7 @@
 			<Button
 				size="rounded"
 				variant={locked ? 'locked' : 'secondary'}
-				class="relative left-4 top-5 h-[70px] w-[70px] border-b-8"
+				class="relative left-4 top-4 h-[70px] w-[70px] border-b-8"
 			>
 				<Icon
 					class={cn(
