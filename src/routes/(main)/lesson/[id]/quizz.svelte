@@ -23,10 +23,8 @@
 	}: Props = $props();
 	let hearts = $state(initialHearts);
 	let percentage = $state(initialPercentage === 100 ? 0 : initialPercentage);
-	let activeIndex = $derived.by(() => {
-		const uncompletedIndex = initialLessonChallenges.findIndex((challenge) => !challenge.completed);
-		return uncompletedIndex === -1 ? 0 : uncompletedIndex;
-	});
+	const uncompletedIndex = initialLessonChallenges.findIndex((challenge) => !challenge.completed);
+	let activeIndex = $state(uncompletedIndex === -1 ? 0 : uncompletedIndex);
 	const challenge = $derived(initialLessonChallenges[activeIndex]);
 	const options = $derived(challenge.challengeOptions ?? []);
 	const title = $derived.by(() => {
@@ -43,7 +41,7 @@
 	};
 
 	const onNext = () => {
-		//
+		activeIndex++;
 	};
 
 	const onContinue = async () => {
