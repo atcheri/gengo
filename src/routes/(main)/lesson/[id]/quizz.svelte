@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { playSound } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 	import Challenge from './challenge.svelte';
 	import ExitDialog from './exit-dialog.svelte';
 	import Footer from './footer.svelte';
 	import Header from './header.svelte';
+	import HeartsDialog from './hearts-dialog.svelte';
+	import PracticeDialog from './practice-dialog.svelte';
 	import QuestionBubble from './question-bubble.svelte';
 	import QuizzFinished from './quizz-finished.svelte';
+	import { heartsDialogOpened, practiceDialogOpened } from './store.js';
 
 	type Props = {
 		initialPercentage: number;
@@ -36,6 +38,10 @@
 	let status = $state<'correct' | 'wrong' | 'none'>('none');
 	let selectedOption = $state(0);
 	let pending = $state(false);
+
+	$effect(() => {
+		initialPercentage === 100 && practiceDialogOpened.set(true);
+	});
 
 	const onSelect = (id: number) => {
 		if (status !== 'none') return;
@@ -88,7 +94,7 @@
 				})
 				.catch((error) => {
 					if (error === 'hearts') {
-						// openHeartsModal();
+						heartsDialogOpened.set(true);
 						console.error('something went wrong with the hearts');
 						return;
 					}
@@ -114,7 +120,7 @@
 				})
 				.catch((error) => {
 					if (error === 'hearts') {
-						// openHeartsModal();
+						heartsDialogOpened.set(true);
 						console.error('something went wrong with the hearts');
 						return;
 					} else if (error === 'practice') {
@@ -131,6 +137,8 @@
 {:else}
 	<Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
 	<ExitDialog />
+	<HeartsDialog />
+	<PracticeDialog />
 	<div class="flex-1">
 		<div class="flex h-full items-center justify-center">
 			<div class="flex w-full flex-col gap-y-12 px-6 lg:min-h-[350px] lg:w-[600px] lg:px-0">

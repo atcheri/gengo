@@ -2,7 +2,6 @@
 	import { sound } from 'svelte-sound';
 	import { cn, playSound } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
-	import { preventDefault } from 'svelte/legacy';
 
 	type Props = {
 		id: number;
