@@ -23,9 +23,6 @@ importers:
       http-status-codes:
         specifier: ^2.3.0
         version: 2.3.0
-      mode-watcher:
-        specifier: ^0.4.1
-        version: 0.4.1(svelte@5.1.12)
       stripe:
         specifier: ^17.3.1
         version: 17.3.1
@@ -123,6 +120,9 @@ importers:
       lucide-svelte:
         specifier: ^0.456.0
         version: 0.456.0(svelte@5.1.12)
+      mode-watcher:
+        specifier: ^0.4.1
+        version: 0.4.1(svelte@5.1.12)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -144,6 +144,9 @@ importers:
       svelte-check:
         specifier: ^4.0.6
         version: 4.0.6(svelte@5.1.12)(typescript@5.6.3)
+      svelte-sonner:
+        specifier: ^0.3.28
+        version: 0.3.28(svelte@5.1.12)
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.5.4
@@ -3042,6 +3045,11 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-sonner@0.3.28:
+    resolution: {integrity: sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==}
+    peerDependencies:
+      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
   svelte-sound@0.6.0:
     resolution: {integrity: sha512-n0JJwWwNEmsGntSN9oe57yevHrIg8Lw3tW2XsfdrDhJXwrbAAmLvbBJQ0Z3TFqONUW7+OWb5Yx04CSCo7q56fA==}
@@ -5953,6 +5961,10 @@ snapshots:
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
       typescript: 5.6.3
+
+  svelte-sonner@0.3.28(svelte@5.1.12):
+    dependencies:
+      svelte: 5.1.12
 
   svelte-sound@0.6.0:
     dependencies:
