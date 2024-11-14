@@ -15,7 +15,6 @@
 			Learn and practice new languages with <span class="italic text-green-600"> Gengo</span> !
 		</h1>
 		<div class="flex w-full max-w-[330px] flex-col items-center gap-y-3">
-			<div>{$page.status}</div>
 			{#if $page.data.session}
 				<Button size="lg" variant="secondary" class="w-full capitalize">
 					<a href="/learn">Continue Learning</a>
