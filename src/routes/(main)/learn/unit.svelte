@@ -23,7 +23,7 @@
 		$props();
 </script>
 
-<UnitBanner {title} {description} />
+<UnitBanner {id} {title} {description} />
 <div class="relative flex flex-col items-center">
 	{#each lessons as lesson, index}
 		{@const isCurrent = lesson.id === activeLesson?.id}
