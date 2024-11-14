@@ -26,7 +26,7 @@
 	</StickyWrapper>
 	<FeedWrapper>
 		<div class="flex w-full flex-col items-center">
-			<img src="/images/shop.svg" alt="Shop" />
+			<img src="/images/cart-parcels.svg" alt="Shop" class="size-36" />
 			<h1 class="my-6 text-center text-2xl font-bold text-neutral-800">Shop</h1>
 			<p class="mb-6 text-center text-lg text-muted-foreground">Spend your points on cool stuff.</p>
 			<Items
