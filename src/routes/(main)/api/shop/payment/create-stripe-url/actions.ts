@@ -14,7 +14,7 @@ export const createStripeUrl = async (userId: string, userEmail: string) => {
 			return_url: returnUrl
 		});
 
-		return { data: stripeSession.url };
+		return stripeSession.url;
 	}
 
 	const stripeSession = await stripe.checkout.sessions.create({
@@ -30,7 +30,7 @@ export const createStripeUrl = async (userId: string, userEmail: string) => {
 						name: 'Gengo Pro',
 						description: 'Unlimited Hearts'
 					},
-					unit_amount: 2000, // $20.00 USD
+					unit_amount: 2000,
 					recurring: {
 						interval: 'month'
 					}
