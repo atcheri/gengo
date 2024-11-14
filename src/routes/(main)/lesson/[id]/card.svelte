@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Sound, sound } from 'svelte-sound';
-	import { cn } from '$lib/utils.js';
+	import { sound } from 'svelte-sound';
+	import { cn, playSound } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 	import { preventDefault } from 'svelte/legacy';
 
@@ -30,17 +30,17 @@
 		type
 	}: Props = $props();
 
-	const handleKeyStroke = (event: KeyboardEvent) => {
+	const handleKeyStroke = async (event: KeyboardEvent) => {
 		event.preventDefault();
 		if (![`Digit${shortcut}`].includes(event.code)) {
 			return;
 		}
+		if (!audioSrc) {
+			return;
+		}
 
-		const voice = new Sound(audioSrc);
-		setTimeout(() => {
-			voice.play();
-			onClick(id);
-		}, 1);
+		await playSound(audioSrc);
+		onClick(id);
 	};
 </script>
 

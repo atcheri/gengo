@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { playSound } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 	import Challenge from './challenge.svelte';
 	import ExitDialog from './exit-dialog.svelte';
@@ -76,7 +77,7 @@
 						const { message } = await response.json();
 						throw message;
 					}
-					// correctControls.play();
+					await playSound('/sounds/correct.wav');
 					status = 'correct';
 					percentage = percentage + 100 / initialLessonChallenges.length;
 					if (initialPercentage === 100) {
@@ -102,7 +103,7 @@
 						const { message } = await response.json();
 						throw message;
 					}
-					// incorrectControls.play();
+					await playSound('/sounds/incorrect.wav');
 					status = 'wrong';
 					percentage = percentage + 100 / initialLessonChallenges.length;
 					if (initialPercentage === 100) {
