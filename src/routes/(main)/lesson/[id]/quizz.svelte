@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { playSound } from '$lib/utils.js';
 	import type { PageData } from './$types.js';
 	import Challenge from './challenge.svelte';
@@ -42,7 +43,12 @@
 	};
 
 	const onNext = () => {
-		activeIndex++;
+		if (activeIndex === initialLessonChallenges.length - 1) {
+			goto('/learn');
+			return;
+		}
+
+		activeIndex < initialLessonChallenges.length - 1 && activeIndex++;
 	};
 
 	const onContinue = async () => {
@@ -132,7 +138,7 @@
 			<h1 class="text-center text-lg font-bold text-neutral-700 lg:text-start lg:text-3xl">
 				{title}
 			</h1>
-			{#if challenge.type === 'ASSIST'}
+			{#if !!challenge && challenge.type === 'ASSIST'}
 				<QuestionBubble question={challenge.question} />
 			{/if}
 			<Challenge
