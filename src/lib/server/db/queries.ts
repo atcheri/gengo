@@ -1,6 +1,13 @@
 import { eq } from 'drizzle-orm';
 import { db } from '$lib/server/db/drizzle.js';
-import { challengeProgress, courses, lessons, units, userProgress } from '$lib/server/db/schema.js';
+import {
+	challengeProgress,
+	courses,
+	lessons,
+	units,
+	userProgress,
+	userSubscription
+} from '$lib/server/db/schema.js';
 
 export const getCourses = async () => {
 	const data = await db.query.courses.findMany();
@@ -184,4 +191,21 @@ export const getLessonPercentage = async (userId: string) => {
 	const percentage = Math.round((completedChallenges.length / lesson.challenges.length) * 100);
 
 	return percentage;
+};
+
+const DAY_IN_MS = 86_400_000;
+export const getUserSubscription = async (userId: string) => {
+	const data = await db.query.userSubscription.findFirst({
+		where: eq(userSubscription.userId, userId)
+	});
+
+	if (!data) return null;
+
+	const isActive =
+		data.stripePriceId && data.stripeCurrentPeriodEnd?.getTime() + DAY_IN_MS > Date.now();
+
+	return {
+		...data,
+		isActive: !!isActive
+	};
 };

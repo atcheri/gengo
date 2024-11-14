@@ -1,4 +1,4 @@
-import { getUserProgress } from '$lib/server/db/queries.js';
+import { getUserProgress, getUserSubscription } from '$lib/server/db/queries.js';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from '../courses/$types.js';
 import crypto from 'crypto';
@@ -8,18 +8,18 @@ import type { courses, userProgress } from '$lib/server/db/schema.js';
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
 	if (!session || !session.user || !session.user.email) {
-		return redirect(StatusCodes.UNAUTHORIZED, '/');
+		return redirect(StatusCodes.TEMPORARY_REDIRECT, '/');
 	}
 
 	const userId = crypto.createHash('md5').update(session.user.email).digest('hex');
-	const up = await getUserProgress(userId);
+	const [up, us] = await Promise.all([getUserProgress(userId), getUserSubscription(userId)]);
 
 	if (!up || !up.activeCourse) {
-		redirect(StatusCodes.NOT_FOUND, '/courses');
+		redirect(StatusCodes.TEMPORARY_REDIRECT, '/courses');
 	}
 
 	return {
-		isPro: false,
+		isPro: !us ? false : us.isActive,
 		userProgress: up as Pick<typeof userProgress.$inferSelect, 'hearts' | 'points'> & {
 			activeCourse: typeof courses.$inferSelect;
 		}

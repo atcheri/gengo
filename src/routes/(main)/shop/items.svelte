@@ -26,7 +26,22 @@
 		await invalidateAll();
 	};
 
-	const onUpgrade = () => {};
+	const onUpgrade = async () => {
+		await fetch('/api/shop/payment/create-stripe-url', {
+			method: 'POST'
+		})
+			.then(async (response) => {
+				if (!response.ok) {
+					const { message } = await response.json();
+					throw message;
+				}
+				const data = await response.json();
+				if (data) {
+					window.location.href = data.url;
+				}
+			})
+			.catch(() => alert('Something went wrong'));
+	};
 </script>
 
 <ul class="w-full">
