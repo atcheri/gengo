@@ -5,7 +5,8 @@ import crypto from 'crypto';
 import { StatusCodes } from 'http-status-codes';
 import type { courses, userProgress } from '$lib/server/db/schema.js';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals, url }) => {
+	const status = url.searchParams.get('status') as 'success' | 'cancel';
 	const session = await locals.auth();
 	if (!session || !session.user || !session.user.email) {
 		return redirect(StatusCodes.TEMPORARY_REDIRECT, '/');
@@ -19,6 +20,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
 
 	return {
+		status,
 		isPro: !us ? false : us.isActive,
 		userProgress: up as Pick<typeof userProgress.$inferSelect, 'hearts' | 'points'> & {
 			activeCourse: typeof courses.$inferSelect;

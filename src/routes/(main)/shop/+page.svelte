@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
 	import FeedWrapper from '$lib/components/feed-wrapper.svelte';
 	import Promo from '$lib/components/promo.svelte';
 	import StickyWrapper from '$lib/components/sticky-wrapper.svelte';
 	import UserProgress from '$lib/components/user-progress.svelte';
 	import type { PageData } from './$types.js';
 	import Items from './items.svelte';
+	import PaymentGatewayNotification from './payment-gateway-notification.svelte';
 
 	export let data: PageData;
 </script>
 
+<PaymentGatewayNotification status={data.status} />
 <div class="flex flex-row-reverse gap-[48px] px-6">
 	<StickyWrapper>
 		<UserProgress

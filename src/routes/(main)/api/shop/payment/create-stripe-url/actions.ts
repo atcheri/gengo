@@ -4,6 +4,8 @@ import { absoluteUrl } from '$lib/utils.js';
 
 export const createStripeUrl = async (userId: string, userEmail: string) => {
 	const returnUrl = absoluteUrl('/shop');
+	const successUrl = absoluteUrl('/shop?status=success');
+	const cancelUrl = absoluteUrl('/shop?status=cancel');
 	const userSubscription = await getUserSubscription(userId);
 
 	if (userSubscription && userSubscription.stripeCustomerId) {
@@ -38,8 +40,8 @@ export const createStripeUrl = async (userId: string, userEmail: string) => {
 		metadata: {
 			userId
 		},
-		success_url: returnUrl,
-		cancel_url: returnUrl
+		success_url: successUrl,
+		cancel_url: cancelUrl
 	});
 
 	return stripeSession.url;
