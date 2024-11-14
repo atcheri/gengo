@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import Coins from '$lib/components/ui/icons/coins.svelte';
 	import InfinityIcon from '$lib/components/ui/icons/infinity-icon.svelte';
+	import { MAX_HEARTS, POINTS_TO_REFILL } from '$lib/constants.js';
 	import Heart from 'lucide-svelte/icons/heart';
 
 	type Props = {
@@ -9,12 +12,19 @@
 		hasActiveSubscription: boolean;
 	};
 
-	const { hearts, points, hasActiveSubscription }: Props = $props();
+	let { hearts, points, hasActiveSubscription }: Props = $props();
 	let pending = $state(false);
 
-	const POINTS_TO_REFILL = 50;
+	let hasMaxHearts = $derived(hearts === MAX_HEARTS);
+	let refillDisabled = $derived(pending || hearts === MAX_HEARTS || points < POINTS_TO_REFILL);
 
-	const onRefillHearts = () => {};
+	const onRefillHearts = async () => {
+		const response = await fetch('/api/shop/refill-hearts', {
+			method: 'POST'
+		});
+		await response.json();
+		await invalidateAll();
+	};
 
 	const onUpgrade = () => {};
 </script>
@@ -25,15 +35,12 @@
 		<div class="flex-1">
 			<p class="text-base font-bold text-neutral-700 lg:text-xl">Refill hearts</p>
 		</div>
-		<Button
-			onclick={onRefillHearts}
-			disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
-		>
-			{#if hearts === 5}
+		<Button onclick={onRefillHearts} disabled={refillDisabled}>
+			{#if hasMaxHearts}
 				full
 			{:else}
-				<div class="flex items-center">
-					<img src="/points.svg" alt="Points" height={20} width={20} />
+				<div class="flex items-center gap-1">
+					<Coins className="size-9 text-orange-500" />
 					<p>{POINTS_TO_REFILL}</p>
 				</div>
 			{/if}

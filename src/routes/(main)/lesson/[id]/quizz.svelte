@@ -106,14 +106,12 @@
 				body: JSON.stringify({ challengeId: challenge.id })
 			})
 				.then(async (response) => {
-					console.log('response:', response);
 					if (!response.ok) {
 						const { message } = await response.json();
 						throw message;
 					}
 					await playSound('/sounds/incorrect.wav');
 					status = 'wrong';
-					percentage = percentage + 100 / initialLessonChallenges.length;
 					if (initialPercentage === 100) {
 						hearts = Math.max(hearts - 1, 0);
 					}

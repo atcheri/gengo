@@ -1,0 +1,1 @@
+<div>Promo component</div>
