@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';
 import { Sound } from 'svelte-sound';
+import { PUBLIC_APP_URL } from '$env/static/public';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -65,3 +66,7 @@ export const playSound = (src: string, delay: number = 1) => {
 		}, delay)
 	);
 };
+
+export function absoluteUrl(path: string) {
+	return `${PUBLIC_APP_URL}${path}`;
+}
