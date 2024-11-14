@@ -92,6 +92,7 @@
 		"drizzle-orm": "^0.36.1",
 		"http-status-codes": "^2.3.0",
 		"mode-watcher": "^0.4.1",
+		"svelte-canvas-confetti": "^0.6.0",
 		"svelte-media-queries": "^1.6.2",
 		"svelte-sound": "^0.6.0"
 	}

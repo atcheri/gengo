@@ -26,6 +26,9 @@ importers:
       mode-watcher:
         specifier: ^0.4.1
         version: 0.4.1(svelte@5.1.12)
+      svelte-canvas-confetti:
+        specifier: ^0.6.0
+        version: 0.6.0
       svelte-media-queries:
         specifier: ^1.6.2
         version: 1.6.2
@@ -2961,6 +2964,9 @@ packages:
     peerDependencies:
       svelte: ^5.0.0
 
+  svelte-canvas-confetti@0.6.0:
+    resolution: {integrity: sha512-Q/jp48oVvwLCkuwQAQS6JJk1g4CGHRtXVrsESze/zsTzkhsn8NLM5GezwmEbXg9ok8tdMugpjpOiWMlNh5zSlw==}
+
   svelte-check@4.0.6:
     resolution: {integrity: sha512-2XwmQNJaKbenJbvu5at+DuRpvF4v73Zu7f0/WkMl1O7WDm/IfF+E13t8D0nnRiRcMsNYm9ufHyLwfeMEnebpdg==}
     engines: {node: '>= 18.0.0'}
@@ -5871,6 +5877,8 @@ snapshots:
       esrap: 1.2.2
       svelte: 5.1.12
       zimmerframe: 1.1.2
+
+  svelte-canvas-confetti@0.6.0: {}
 
   svelte-check@4.0.6(svelte@5.1.12)(typescript@5.6.3):
     dependencies:

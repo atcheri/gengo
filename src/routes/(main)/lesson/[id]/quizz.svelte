@@ -7,6 +7,7 @@
 	import Footer from './footer.svelte';
 	import Header from './header.svelte';
 	import QuestionBubble from './question-bubble.svelte';
+	import QuizzFinished from './quizz-finished.svelte';
 
 	type Props = {
 		initialPercentage: number;
@@ -43,12 +44,7 @@
 	};
 
 	const onNext = () => {
-		if (activeIndex === initialLessonChallenges.length - 1) {
-			goto('/learn');
-			return;
-		}
-
-		activeIndex < initialLessonChallenges.length - 1 && activeIndex++;
+		activeIndex++;
 	};
 
 	const onContinue = async () => {
@@ -130,26 +126,30 @@
 	};
 </script>
 
-<Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
-<ExitDialog />
-<div class="flex-1">
-	<div class="flex h-full items-center justify-center">
-		<div class="flex w-full flex-col gap-y-12 px-6 lg:min-h-[350px] lg:w-[600px] lg:px-0">
-			<h1 class="text-center text-lg font-bold text-neutral-700 lg:text-start lg:text-3xl">
-				{title}
-			</h1>
-			{#if !!challenge && challenge.type === 'ASSIST'}
-				<QuestionBubble question={challenge.question} />
-			{/if}
-			<Challenge
-				{options}
-				{onSelect}
-				{selectedOption}
-				disabled={pending}
-				{status}
-				type={challenge.type}
-			/>
+{#if !challenge}
+	<QuizzFinished challenges={initialLessonChallenges} {hearts} lessonId={initialLessonId} />
+{:else}
+	<Header {hearts} {percentage} hasActiveSubscription={!!userSubscription?.isActive} />
+	<ExitDialog />
+	<div class="flex-1">
+		<div class="flex h-full items-center justify-center">
+			<div class="flex w-full flex-col gap-y-12 px-6 lg:min-h-[350px] lg:w-[600px] lg:px-0">
+				<h1 class="text-center text-lg font-bold text-neutral-700 lg:text-start lg:text-3xl">
+					{title}
+				</h1>
+				{#if challenge.type === 'ASSIST'}
+					<QuestionBubble question={challenge.question} />
+				{/if}
+				<Challenge
+					{options}
+					{onSelect}
+					{selectedOption}
+					disabled={pending}
+					{status}
+					type={challenge.type}
+				/>
+			</div>
 		</div>
 	</div>
-</div>
-<Footer disabled={pending || !selectedOption} {status} onCheck={onContinue} />
+	<Footer disabled={pending || !selectedOption} {status} onCheck={onContinue} />
+{/if}
