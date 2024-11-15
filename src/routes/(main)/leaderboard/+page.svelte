@@ -27,7 +27,7 @@
 	</StickyWrapper>
 	<FeedWrapper>
 		<div class="flex w-full flex-col items-center">
-			<img src="/leaderboard.svg" alt="Leaderboard" height={90} width={90} />
+			<img src="/images/star-medal.svg" alt="Leaderboard" height={90} width={90} />
 			<h1 class="my-6 text-center text-2xl font-bold text-neutral-800">Leaderboard</h1>
 			<p class="mb-6 text-center text-lg text-muted-foreground">
 				See where you stand among other learners in the community.
