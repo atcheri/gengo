@@ -7,13 +7,19 @@
 	import Unit from './unit.svelte';
 
 	export let data: PageData;
-	let { activeCourse, courseProgress, hearts, lessonPercentage, points, units } = data;
+	let { activeCourse, courseProgress, hearts, lessonPercentage, points, units, userSubscription } =
+		data;
 </script>
 
 {#if activeCourse}
 	<div class="flex flex-row-reverse gap-[48px] px-6">
 		<StickyWrapper>
-			<UserProgress {activeCourse} {hearts} {points} hasActiveSubscription={false} />
+			<UserProgress
+				{activeCourse}
+				{hearts}
+				{points}
+				hasActiveSubscription={!!userSubscription?.isActive}
+			/>
 		</StickyWrapper>
 		<FeedWrapper>
 			<Header title={activeCourse.title} />

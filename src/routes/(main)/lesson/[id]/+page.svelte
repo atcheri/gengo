@@ -3,7 +3,7 @@
 	import Quizz from './quizz.svelte';
 
 	export let data: PageData;
-	const { lesson, userProgress, initialPercentage } = data;
+	const { lesson, userProgress, initialPercentage, userSubscription } = data;
 </script>
 
 <Quizz
@@ -11,5 +11,5 @@
 	initialLessonChallenges={lesson.challenges}
 	initialHearts={userProgress.hearts}
 	{initialPercentage}
-	userSubscription={null}
+	{userSubscription}
 />

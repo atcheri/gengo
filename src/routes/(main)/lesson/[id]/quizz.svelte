@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { playSound } from '$lib/utils.js';
+	import { toast } from 'svelte-sonner';
 	import type { PageData } from './$types.js';
 	import Challenge from './challenge.svelte';
 	import ExitDialog from './exit-dialog.svelte';
@@ -16,7 +17,7 @@
 		initialHearts: number;
 		initialLessonId: number;
 		initialLessonChallenges: PageData['lesson']['challenges'];
-		userSubscription: any;
+		userSubscription: PageData['userSubscription'];
 	};
 
 	const {
@@ -95,10 +96,9 @@
 				.catch((error) => {
 					if (error === 'hearts') {
 						heartsDialogOpened.set(true);
-						console.error('something went wrong with the hearts');
 						return;
 					}
-					// toast.error('Something went wrong. Please try again.')
+					toast.error('Something went wrong. Please try again.');
 				});
 		} else {
 			await fetch('/api/lesson/reduce-hearts', {
@@ -119,12 +119,13 @@
 				.catch((error) => {
 					if (error === 'hearts') {
 						heartsDialogOpened.set(true);
-						console.error('something went wrong with the hearts');
 						return;
 					} else if (error === 'practice') {
 						console.log("nothing to do, it's just practice");
+					} else if (error === 'subscription') {
+						console.info('nothing to do,the user has a subscription');
 					}
-					// toast.error('Something went wrong. Please try again.')
+					toast.error('Something went wrong. Please try again.');
 				});
 		}
 	};

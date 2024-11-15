@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db/drizzle.js';
-import { getUserProgress } from '$lib/server/db/queries.js';
+import { getUserProgress, getUserSubscription } from '$lib/server/db/queries.js';
 import { challengeProgress, challenges, userProgress } from '$lib/server/db/schema.js';
 import { and, eq } from 'drizzle-orm';
 
@@ -30,7 +30,13 @@ export const reduceHearts = async (userId: string, challengeId: number) => {
 	}
 
 	if (currentUserProgress.hearts === 0) {
-		throw Error('hearts');
+		return;
+		// throw Error('hearts');
+	}
+
+	const userSubscription = await getUserSubscription(userId);
+	if (!userSubscription?.isActive) {
+		throw Error('subscription');
 	}
 
 	await db

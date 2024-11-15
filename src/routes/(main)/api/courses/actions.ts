@@ -11,9 +11,9 @@ export const upsertUserProgress = async (user: User, courseId: number) => {
 		throw new Error('Course not found');
 	}
 
-	// if (!course.units.length || !course.units[0].lessons.length) {
-	//   throw new Error("Course is empty");
-	// }
+	if (!course.units.length || !course.units[0].lessons.length) {
+		throw new Error('Course is empty');
+	}
 
 	if (!user.email) {
 		throw Error('User must have an email address');

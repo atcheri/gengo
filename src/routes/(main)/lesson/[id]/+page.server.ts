@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { getLesson, getUserProgress } from '$lib/server/db/queries.js';
+import { getLesson, getUserProgress, getUserSubscription } from '$lib/server/db/queries.js';
 import type { PageServerLoad } from './$types.js';
 import { StatusCodes } from 'http-status-codes';
 import crypto from 'crypto';
@@ -15,9 +15,10 @@ export const load: PageServerLoad = (async ({ locals, params }) => {
 	}
 
 	const userId = crypto.createHash('md5').update(session.user.email).digest('hex');
-	const [lesson, userProgress] = await Promise.all([
+	const [lesson, userProgress, userSubscription] = await Promise.all([
 		getLesson(userId, Number(params.id)),
-		getUserProgress(userId)
+		getUserProgress(userId),
+		getUserSubscription(userId)
 	]);
 
 	if (!lesson || !userProgress) {
@@ -29,5 +30,5 @@ export const load: PageServerLoad = (async ({ locals, params }) => {
 			lesson.challenges.length) *
 		100;
 
-	return { lesson, userProgress, initialPercentage };
+	return { lesson, userProgress, initialPercentage, userSubscription };
 }) satisfies PageServerLoad;
