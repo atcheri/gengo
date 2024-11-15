@@ -23,22 +23,22 @@ const main = async () => {
 			{
 				id: 1,
 				title: 'Spanish',
-				imageSrc: '/images/icons/es.svg'
+				imageSrc: '/images/es.svg'
 			},
 			{
 				id: 2,
 				title: 'Italian',
-				imageSrc: '/images/icons/it.svg'
+				imageSrc: '/images/it.svg'
 			},
 			{
 				id: 3,
 				title: 'French',
-				imageSrc: '/images/icons/fr.svg'
+				imageSrc: '/images/fr.svg'
 			},
 			{
 				id: 4,
 				title: 'Japanese',
-				imageSrc: '/images/icons/jp.svg'
+				imageSrc: '/images/jp.svg'
 			}
 		]);
 
