@@ -19,7 +19,7 @@
 			points={data.userProgress.points}
 			hasActiveSubscription={data.isPro}
 		/>
-		{#if data.isPro}
+		{#if !data.isPro}
 			<Promo />
 		{/if}
 		<!-- <Quests points={userProgress.points} /> -->

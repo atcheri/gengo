@@ -20,7 +20,7 @@
 			points={userProgress.points}
 			hasActiveSubscription={isPro}
 		/>
-		{#if isPro}
+		{#if !isPro}
 			<Promo />
 		{/if}
 		<!-- <Quests points={userProgress.points} /> -->
