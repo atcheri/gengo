@@ -35,8 +35,8 @@ export const reduceHearts = async (userId: string, challengeId: number) => {
 	}
 
 	const userSubscription = await getUserSubscription(userId);
-	if (!userSubscription?.isActive) {
-		throw Error('subscription');
+	if (userSubscription?.isActive) {
+		throw Error('has-subscription');
 	}
 
 	await db

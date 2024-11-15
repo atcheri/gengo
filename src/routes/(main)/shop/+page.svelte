@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FeedWrapper from '$lib/components/feed-wrapper.svelte';
 	import Promo from '$lib/components/promo.svelte';
+	import Quests from '$lib/components/quests.svelte';
 	import StickyWrapper from '$lib/components/sticky-wrapper.svelte';
 	import UserProgress from '$lib/components/user-progress.svelte';
 	import type { PageData } from './$types.js';
@@ -22,7 +23,7 @@
 		{#if !data.isPro}
 			<Promo />
 		{/if}
-		<!-- <Quests points={userProgress.points} /> -->
+		<Quests points={data.userProgress.points} />
 	</StickyWrapper>
 	<FeedWrapper>
 		<div class="flex w-full flex-col items-center">

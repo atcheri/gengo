@@ -113,8 +113,9 @@
 					await playSound('/sounds/incorrect.wav');
 					status = 'wrong';
 					if (initialPercentage === 100) {
-						hearts = Math.max(hearts - 1, 0);
+						return;
 					}
+					hearts = Math.max(hearts - 1, 0);
 				})
 				.catch((error) => {
 					if (error === 'hearts') {
@@ -122,7 +123,7 @@
 						return;
 					} else if (error === 'practice') {
 						console.log("nothing to do, it's just practice");
-					} else if (error === 'subscription') {
+					} else if (error === 'has-subscription') {
 						console.info('nothing to do,the user has a subscription');
 					}
 					toast.error('Something went wrong. Please try again.');

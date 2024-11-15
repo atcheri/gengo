@@ -6,6 +6,7 @@
 	import Avatar from '$lib/components/ui/avatar/avatar.svelte';
 	import AvatarImage from '$lib/components/ui/avatar/avatar-image.svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
+	import Quests from '$lib/components/quests.svelte';
 	import type { PageData } from './$types.js';
 
 	export let data: PageData;
@@ -23,7 +24,7 @@
 		{#if !isPro}
 			<Promo />
 		{/if}
-		<!-- <Quests points={userProgress.points} /> -->
+		<Quests points={userProgress.points} />
 	</StickyWrapper>
 	<FeedWrapper>
 		<div class="flex w-full flex-col items-center">
